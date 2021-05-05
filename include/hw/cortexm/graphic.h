@@ -141,15 +141,22 @@ enum
 
 // ----------------------------------------------------------------------------
 
+// Variables to store coordinates and usage data as well as initiliasing information for display and joysticks
+static int x_, y_;
+static int x_joystick_left = 190, y_joystick_left = 190;
+static int x_joystick_right = 190, y_joystick_right = 190;
+static bool left_joystick_used = false;
+static bool right_joystick_used = false;
+
 // Methods returning coordinates and usage data of display and joysticks
-int get_x_(void);
-int get_y_(void);
-int get_x_joystick_left(void);
-int get_y_joystick_left(void);
-int get_x_joystick_right(void);
-int get_y_joystick_right(void);
-bool get_left_joystick_used(void);
-bool get_right_joystick_used(void);
+int get_x_();
+int get_y_();
+int get_x_joystick_left();
+int get_y_joystick_left();
+int get_x_joystick_right();
+int get_y_joystick_right();
+bool get_left_joystick_used();
+bool get_right_joystick_used();
 
 void cortexm_graphic_start(bool nographic);
 

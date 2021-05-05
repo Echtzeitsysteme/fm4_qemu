@@ -84,13 +84,6 @@ static SDL_Cursor *button_cursor = NULL;
 static ButtonState *current_button = NULL;
 static ButtonState *pushed_button = NULL;
 
-// Variables to store coordinates and usage data as well as initiliasing information for display and joysticks
-static int x_, y_;
-static int x_joystick_left = 190, y_joystick_left = 190;
-static int x_joystick_right = 190, y_joystick_right = 190;
-static bool left_joystick_used = false;
-static bool right_joystick_used = false;
-
 // ----------------------------------------------------------------------------
 
 typedef struct
