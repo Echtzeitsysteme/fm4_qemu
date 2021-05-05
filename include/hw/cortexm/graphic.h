@@ -46,11 +46,13 @@
 typedef struct ButtonState ButtonState;
 
 // Storage for board graphic context, stored in CortexMBoardState
-typedef struct BoardGraphicContext {
+typedef struct BoardGraphicContext
+{
 
     const char *picture_file_name;
     const char *picture_file_absolute_path;
     const char *window_caption;
+    uint32_t lcd_text_color;
 
     // Array of pointers to button states.
     ButtonState **buttons;
@@ -72,7 +74,8 @@ typedef struct BoardGraphicContext {
 
 // ----------------------------------------------------------------------------
 
-typedef struct {
+typedef struct
+{
 
     const char *name; // NULL for table end.
 
@@ -93,7 +96,8 @@ typedef struct {
 // ----------------------------------------------------------------------------
 
 // Storage for LED graphic context, stored in GPIOLEDState
-typedef struct {
+typedef struct
+{
     SDL_Rect rectangle;
     SDL_Surface *crop_off;
     SDL_Surface *crop_on;
@@ -101,16 +105,51 @@ typedef struct {
 
 // ----------------------------------------------------------------------------
 
-enum {
+// Storage for LCD graphic context, stored in GPIOLCDState
+typedef struct
+{
+    SDL_Rect rectangle;
+} LCDGraphicContext;
+
+// ----------------------------------------------------------------------------
+
+// ----------------------------------------------------------------------------
+
+// Storage for LCD graphic context, stored in GPIOLCDState
+typedef struct
+{
+    int xCoordinate;
+    int yCoordinate;
+} LCDPixelContext;
+
+// ----------------------------------------------------------------------------
+
+// Enumeration for graphic events
+enum
+{
     GRAPHIC_EVENT_NONE = 0,
     GRAPHIC_EVENT_QUIT,
     GRAPHIC_EVENT_EXIT,
     GRAPHIC_EVENT_BOARD_INIT,
     GRAPHIC_EVENT_LED_INIT,
     GRAPHIC_EVENT_LED_TURN,
+    GRAPHIC_EVENT_PERIPHERALS,
+    GRAPHIC_EVENT_DRAW_PIXEL,
+    GRAPHIC_EVENT_DRAW_REC,
+    GRAPHIC_EVENT_SET_LCD_TEXT_COLOR,
 };
 
 // ----------------------------------------------------------------------------
+
+// Methods returning coordinates and usage data of display and joysticks
+int get_x_(void);
+int get_y_(void);
+int get_x_joystick_left(void);
+int get_y_joystick_left(void);
+int get_x_joystick_right(void);
+int get_y_joystick_right(void);
+bool get_left_joystick_used(void);
+bool get_right_joystick_used(void);
 
 void cortexm_graphic_start(bool nographic);
 
@@ -128,22 +167,21 @@ void cortexm_graphic_event_loop(void);
 
 // ----- Board graphic functions -----
 void cortexm_graphic_board_clear_graphic_context(
-        BoardGraphicContext *board_graphic_context);
+    BoardGraphicContext *board_graphic_context);
 
 bool cortexm_graphic_board_is_graphic_context_initialised(
-        BoardGraphicContext *board_graphic_context);
+    BoardGraphicContext *board_graphic_context);
 
 void cortexm_graphic_board_add_button(
-        BoardGraphicContext *board_graphic_context, ButtonState *button_state);
+    BoardGraphicContext *board_graphic_context, ButtonState *button_state);
 
 // ----- LED graphic function -----
 void cortexm_graphic_led_clear_graphic_context(
-        LEDGraphicContext *led_graphic_context);
+    LEDGraphicContext *led_graphic_context);
 
 bool cortexm_graphic_led_is_graphic_context_initialised(
-        LEDGraphicContext *led_graphic_context);
+    LEDGraphicContext *led_graphic_context);
 
 // ----------------------------------------------------------------------------
 
 #endif /* CORTEXM_GRAPHIC_H_ */
-

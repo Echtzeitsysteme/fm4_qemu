@@ -17,11 +17,13 @@ obj-$(CONFIG_GNU_MCU_ECLIPSE) += bitband.o
 obj-$(CONFIG_GNU_MCU_ECLIPSE) += board.o
 obj-$(CONFIG_GNU_MCU_ECLIPSE) += graphic.o
 obj-$(CONFIG_GNU_MCU_ECLIPSE) += gpio-led.o
+obj-$(CONFIG_GNU_MCU_ECLIPSE) += gpio-lcd.o
 obj-$(CONFIG_GNU_MCU_ECLIPSE) += button.o 
 obj-$(CONFIG_GNU_MCU_ECLIPSE) += button-gpio.o 
 obj-$(CONFIG_GNU_MCU_ECLIPSE) += button-reset.o
 
 obj-$(CONFIG_STM32) += stm32/
+obj-$(CONFIG_FM4) += fm4/
 obj-$(CONFIG_KINETIS) += kinetis/
 obj-$(CONFIG_LPC) += lpc/
 obj-$(CONFIG_TIVA) += tiva/

@@ -1,0 +1,13 @@
+# [GNU MCU Eclipse]
+
+obj-$(CONFIG_FM4) +=  gpio.o 
+obj-$(CONFIG_FM4) +=  mcus.o
+#obj-$(CONFIG_FM4) +=  exti.o
+obj-$(CONFIG_FM4) +=  mcu.o
+obj-$(CONFIG_FM4) +=  boards.o
+#obj-$(CONFIG_FM4) +=  crg.o
+#obj-$(CONFIG_FM4) +=  flash_if.o
+#obj-$(CONFIG_FM4) +=  rtc.o
+obj-$(CONFIG_FM4) +=  adc0.o
+
+# [GNU MCU Eclipse]

@@ -503,6 +503,7 @@ install-gme:
 	$(INSTALL_DATA) "$(SRC_PATH)"/gnu-mcu-eclipse/devices/README.md "$(DESTDIR)$(qemu_datadir)"/devices
 	$(INSTALL_DIR) "$(DESTDIR)$(qemu_datadir)"/graphics
 	$(INSTALL_DATA) "$(SRC_PATH)"/gnu-mcu-eclipse/graphics/*.jpg "$(DESTDIR)$(qemu_datadir)"/graphics
+	$(INSTALL_DATA) "$(SRC_PATH)"/gnu-mcu-eclipse/graphics/*.png "$(DESTDIR)$(qemu_datadir)"/graphics
 
 # various test targets
 test speed: all
