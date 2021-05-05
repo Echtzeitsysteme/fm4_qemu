@@ -77,7 +77,7 @@ void cortexm_board_greeting(CortexMBoardState *board)
 }
 
 BoardGraphicContext *cortexm_board_init_graphic_image(CortexMBoardState *board,
-        const char *file_name)
+                                                      const char *file_name)
 {
 #if defined(CONFIG_SDL)
 
@@ -114,8 +114,8 @@ BoardGraphicContext *cortexm_board_init_graphic_image(CortexMBoardState *board,
 #endif
 
     cortexm_graphic_enqueue_event(GRAPHIC_EVENT_BOARD_INIT,
-            &(board->graphic_context),
-            NULL);
+                                  &(board->graphic_context),
+                                  NULL);
 
     return &(board->graphic_context);
 
@@ -124,6 +124,11 @@ BoardGraphicContext *cortexm_board_init_graphic_image(CortexMBoardState *board,
     return NULL;
 
 #endif /* defined(CONFIG_SDL) */
+}
+
+void *cortexm_peripheral_init_graphic_image(CortexMBoardState *board)
+{
+    cortexm_graphic_enqueue_event(GRAPHIC_EVENT_PERIPHERALS, &(board->graphic_context), NULL);
 }
 
 // ----- Private --------------------------------------------------------------
@@ -139,7 +144,7 @@ static const TypeInfo cortexm_board_type_init = {
     .parent = TYPE_CORTEXM_BOARD_PARENT,
     .instance_size = sizeof(CortexMBoardState),
     .class_init = cortexm_board_class_init_callback,
-    .class_size = sizeof(CortexMBoardClass) };
+    .class_size = sizeof(CortexMBoardClass)};
 
 static void cortexm_generic_board_init_callback(MachineState *machine)
 {
@@ -156,7 +161,7 @@ static void cortexm_generic_board_init_callback(MachineState *machine)
 }
 
 static void cortexm_generic_board_class_init_callback(ObjectClass *oc,
-        void *data)
+                                                      void *data)
 {
     MachineClass *mc = MACHINE_CLASS(oc);
 
@@ -168,7 +173,7 @@ static const TypeInfo cortexm_generic_board_type_init = {
     .name = BOARD_TYPE_NAME("generic"),
     .parent = TYPE_CORTEXM_BOARD,
     .class_init = cortexm_generic_board_class_init_callback,
-/**/
+    /**/
 };
 
 // ----------------------------------------------------------------------------
