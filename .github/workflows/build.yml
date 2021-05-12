@@ -1,0 +1,28 @@
+name: build
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+    defaults:
+      run:
+        working-directory: /home/runner
+    steps:
+      - name: Setup environment
+        run: |
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update && apt-get install -y git build-essential ninja-build
+          git clone --recurse-submodules https://github.com/xpack/xpack-build-box.git xpack-build-box
+          sudo bash xpack-build-box/ubuntu/install-native-xbb-v3.1.sh
+          sudo bash xpack-build-box/ubuntu/add-native-extras-xbb-v3.1.sh
+          git clone --recurse-submodules https://github.com/xpack-dev-tools/qemu-arm-xpack.git qemu-arm-xpack
+          sed -i '65,71d' qemu-arm-xpack/scripts/common-versions-source.sh
+      - name: Build
+        run: |
+          export QEMU_GIT_COMMIT="${GITHUB_SHA}"
+          export QEMU_GIT_URL="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}.git"
+          bash qemu-arm-xpack/scripts/build-native.sh --debug --develop
+      - name: Archive production artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: linux-x64
+          path: ~/Work/qemu-arm-dev/linux-x64/install/qemu-arm
