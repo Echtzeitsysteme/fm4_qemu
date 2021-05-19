@@ -23,7 +23,7 @@ jobs:
           bash qemu-arm-xpack/scripts/build-native.sh --debug --develop
       - name: Package output
         run:  |
-          tar -czf ./linux-x64.tar.gz ./Work/qemu-arm-dev/linux-x64/install/qemu-arm
+          tar -czf /tmp/linux-x64.tar.gz /home/runner/Work/qemu-arm-dev/linux-x64/install/qemu-arm
       - name: Shorten hash
         id: short_sha
         run: echo "::set-output name=sha8::$(echo ${GITHUB_SHA} | cut -c1-8)"
@@ -44,6 +44,6 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./linux-x64.tar.gz
+          asset_path: /tmp/linux-x64.tar.gz
           asset_name: linux-x64.tar.gz
           asset_content_type: application/gzip
